@@ -1,1 +1,1 @@
-web: npm start
+web: npm install; bower install; ng serve
