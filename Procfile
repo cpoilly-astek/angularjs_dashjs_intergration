@@ -1,1 +1,1 @@
-web: bower install && gulp serve
+web: gulp serve
