@@ -1,0 +1,36 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\cedri\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add yo generator:angular
+
+PATH: 
+  C:\Program Files (x86)\cmder\bin;C:\Program Files (x86)\cmder\vendor\conemu-maximus5\ConEmu\Scripts;C:\Program Files (x86)\cmder\vendor\conemu-maximus5;C:\Program Files (x86)\cmder\vendor\conemu-maximus5\ConEmu;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\nodejs\;C:\Program Files (x86)\cmder\vendor\git-for-windows;C:\Program Files (x86)\cmder;C:\Program Files (x86)\Skype\Phone\;C:\Users\cedri\AppData\Roaming\npm;C:\Program Files (x86)\Microsoft VS Code\Code.exe;C:\Program Files\Git\cmd;C:\Program Files (x86)\Notepad++;C:\Program Files (x86)\Heroku\bin;C:\Program Files (x86)\git\cmd;C:\Program Files (x86)\Git\cmd;C:\Program Files (x86)\Common Files\Acronis\VirtualFile\;C:\Program Files (x86)\Common Files\Acronis\VirtualFile64\;C:\Program Files (x86)\Common Files\Acronis\SnapAPI\;C:\Program Files\TortoiseSVN\bin;C:\Program Files\VisualSVN Server\bin;C:\Program Files (x86)\Microsoft VS Code\bin;C:\Program Files (x86)\Git\cmd\;C:\Users\cedri\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\share\vim\vim74;C:\Program Files (x86)\cmder\
+
+Yarn version: 
+  0.17.10
+
+Node version: 
+  6.6.0
+
+Platform: 
+  win32 x64
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: generator:angular: Invalid protocol: generator:
+      at Request.init (C:\Users\cedri\AppData\Roaming\npm\node_modules\yarn\updates\0.17.10\node_modules\request\request.js:459:31)
+      at new Request (C:\Users\cedri\AppData\Roaming\npm\node_modules\yarn\updates\0.17.10\node_modules\request\request.js:128:8)
+      at request (C:\Users\cedri\AppData\Roaming\npm\node_modules\yarn\updates\0.17.10\node_modules\request\index.js:54:10)
+      at RequestManager.execute (C:\Users\cedri\AppData\Roaming\npm\node_modules\yarn\updates\0.17.10\lib\util\request-manager.js:350:17)
+      at RequestManager.shiftQueue (C:\Users\cedri\AppData\Roaming\npm\node_modules\yarn\updates\0.17.10\lib\util\request-manager.js:377:10)
+      at Promise (C:\Users\cedri\AppData\Roaming\npm\node_modules\yarn\updates\0.17.10\lib\util\request-manager.js:162:12)
+      at RequestManager.request (C:\Users\cedri\AppData\Roaming\npm\node_modules\yarn\updates\0.17.10\lib\util\request-manager.js:160:21)
+      at NpmRegistry.request (C:\Users\cedri\AppData\Roaming\npm\node_modules\yarn\updates\0.17.10\lib\registries\npm-registry.js:107:32)
+      at C:\Users\cedri\AppData\Roaming\npm\node_modules\yarn\updates\0.17.10\lib\resolvers\registries\npm-resolver.js:92:54
+      at next (native)
