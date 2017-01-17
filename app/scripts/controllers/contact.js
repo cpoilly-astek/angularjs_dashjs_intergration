@@ -2,15 +2,13 @@
 
 /**
  * @ngdoc function
- * @name transperfectDashjsApp.controller:MainCtrl
+ * @name transperfectDashjsApp.controller:ContactCtrl
  * @description
- * # MainCtrl
+ * # ContactCtrl
  * Controller of the transperfectDashjsApp
  */
 angular.module('transperfectDashjsApp')
-  .controller('MainCtrl', function () {
-    window.init();
-
+  .controller('ContactCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',

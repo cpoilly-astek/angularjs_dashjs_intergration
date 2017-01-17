@@ -80,7 +80,7 @@ gulp.task('start:server', function() {
 
 gulp.task('start:server:test', function() {
   $.connect.server({
-    root: ['test', yeoman.app, '.tmp'],
+    root: [/*'test', */yeoman.app, '.tmp'],
     livereload: true,
     port: 9001
   });

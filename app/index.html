@@ -1,95 +1,294 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Events example</title>
+
+  <script src="vendor/dash.all.debug.js"></script>
+
+  <script>
+    var player, firstLoad = true;
+
+    function init() {
+      player = dashjs.MediaPlayer().create();
+      player.getDebug().setLogToBrowserConsole(false);
+    }
+
+    function showEvent(e) {
+      log("EVENT RECEIVED: " + e.type);
+      // We double process in order to pretty-print. Only two levels of object properties are exposed.
+      for (var name in e) {
+
+        if (typeof e[name] != 'object') {
+          log("    " + name + ": " + e[name]);
+        }
+      }
+      for (name in e) {
+        if (typeof e[name] == 'object') {
+          log("    " + name + ":");
+          for (name2 in e[name]) {
+            log("        " + name2 + ": " + JSON.stringify(e[name][name2]));
+          }
+        }
+      }
+    }
+
+
+    function log(msg) {
+      msg = msg.length > 90 ? msg.substring(0, 90) + "..." : msg; // to avoid wrapping with large objects
+      var tracePanel = document.getElementById("trace");
+      tracePanel.innerHTML += msg + "\n";
+      tracePanel.scrollTop = tracePanel.scrollHeight;
+      console.log(msg);
+    }
+
+    function setListener(eventName) {
+      player.on(dashjs.MediaPlayer.events[eventName], showEvent);
+      var element = document.createElement("input");
+      element.type = "button";
+      element.id = eventName;
+      element.value = "Remove " + eventName;
+      element.onclick = function () {
+        player.off(dashjs.MediaPlayer.events[eventName], showEvent);
+        document.getElementById("eventHolder").removeChild(element);
+      };
+      document.getElementById("eventHolder").appendChild(element);
+    }
+
+    function load(button) {
+      // Add your own URL in here if you wish to epxlore events with other content.
+      var url = "http://rdmedia.bbc.co.uk/dash/ondemand/testcard/1/client_manifest-events.mpd";
+
+      if (!firstLoad) {
+        player.attachSource(url);
+      }
+      else {
+        firstLoad = false;
+        button.value = "RELOAD PLAYER";
+        player.initialize(document.querySelector("video"), url, true);
+      }
+      document.getElementById("trace").innerHTML = "";
+    }
+  </script>
+
+<style>
+        video {
+            width: 640px;
+            height: 360px;
+        }
+        textarea {
+            width: 500px;
+            height:360px;
+            font-size: 10px;
+        }
+        input, select {
+            background-color: orange;
+        }
+    </style>
+</head>
+<body onload="init()">
+<div>
+  This sample allows you to explore the various external events that are accessible from MediaPlayer. Events can be dynamically
+  added and removed. <br/> Choose the events you would like to monitor before starting playback:
+  <select id="availableEvents" onChange="setListener(this.options[this.selectedIndex].text)">
+<option selected disabled>Select an event ..</option>
+<option>BUFFER_EMPTY</option>
+<option>BUFFER_LOADED</option>
+<option>CAN_PLAY</option>
+<option>ERROR</option>
+<option>LOG</option>
+<option>MANIFEST_LOADED</option>
+<option>METRIC_ADDED</option>
+<option>METRIC_CHANGED</option>
+<option>METRIC_UPDATED</option>
+<option>METRICS_CHANGED</option>
+<option>PERIOD_SWITCH_COMPLETED</option>
+<option>PERIOD_SWITCH_STARTED</option>
+<option>PLAYBACK_ENDED</option>
+<option>PLAYBACK_ERROR</option>
+<option>PLAYBACK_METADATA_LOADED</option>
+<option>PLAYBACK_PAUSED</option>
+<option>PLAYBACK_PLAYING</option>
+<option>PLAYBACK_PROGRESS</option>
+<option>PLAYBACK_RATE_CHANGED</option>
+<option>PLAYBACK_SEEKED</option>
+<option>PLAYBACK_SEEKING</option>
+<option>PLAYBACK_STARTED</option>
+<option>PLAYBACK_TIME_UPDATED</option>
+<option>STREAM_INITIALIZED</option>
+<option>TEXT_TRACK_ADDED</option>
+<option>TEXT_TRACKS_ADDED</option>
+</select>
+<p/>
+<input type="button" value="LOAD PLAYER" onclick="load(this)"/>
+</div>
+
+<div>
+  <video controls="true">
+  </video>
+  <textarea id="trace" placeholder="Trapped events will be displayed here"></textarea>
+  <p/>
+  <span id="eventHolder">Events actively being listened to are shown below. Remove the listener by clicking on the event button.<br/></span>
+</div>
+</body>
+
+</html>-->
+
+
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/bootstrap.css">
-    <link rel="stylesheet" href="styles/main.css">
-    <!-- endbuild -->
-  </head>
-  <body ng-app="transperfectDashjsApp">
-    <!--[if lte IE 8]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
 
-    <!-- Add your site or application content here -->
-    <div class="header">
-      <div class="navbar navbar-default" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
 
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
+  <link rel="stylesheet" href="styles/bootstrap.css">
+  <link rel="stylesheet" href="styles/main.css">
+
+  <!--<script src="vendor/dash.all.debug.js"></script>-->
+
+  <script>
+    var player, firstLoad = true;
+
+    function init() {
+      player = dashjs.MediaPlayer().create();
+      player.getDebug().setLogToBrowserConsole(false);
+    }
+
+    function showEvent(e) {
+      log("EVENT RECEIVED: " + e.type);
+      // We double process in order to pretty-print. Only two levels of object properties are exposed.
+      for (var name in e) {
+
+        if (typeof e[name] != 'object') {
+          log("    " + name + ": " + e[name]);
+        }
+      }
+      for (name in e) {
+        if (typeof e[name] == 'object') {
+          log("    " + name + ":");
+          for (name2 in e[name]) {
+            log("        " + name2 + ": " + JSON.stringify(e[name][name2]));
+          }
+        }
+      }
+    }
+
+    function log(msg) {
+      msg = msg.length > 90 ? msg.substring(0, 90) + "..." : msg; // to avoid wrapping with large objects
+      var tracePanel = document.getElementById("trace");
+      tracePanel.innerHTML += msg + "\n";
+      tracePanel.scrollTop = tracePanel.scrollHeight;
+      console.log(msg);
+    }
+
+    function setListener(eventName) {
+      player.on(dashjs.MediaPlayer.events[eventName], showEvent);
+      var element = document.createElement("input");
+      element.type = "button";
+      element.id = eventName;
+      element.value = "Remove " + eventName;
+      element.onclick = function () {
+        player.off(dashjs.MediaPlayer.events[eventName], showEvent);
+        document.getElementById("eventHolder").removeChild(element);
+      };
+      document.getElementById("eventHolder").appendChild(element);
+    }
+
+    function load(button) {
+      // Add your own URL in here if you wish to epxlore events with other content.
+      var url = "http://rdmedia.bbc.co.uk/dash/ondemand/testcard/1/client_manifest-events.mpd";
+
+      if (!firstLoad) {
+        // re-initialize as removed when changed viewport// todo: optimisation -> initialize only if needed
+        player.initialize(document.querySelector("video"), url, true);
+        player.attachSource(url);
+      }
+      else {
+        firstLoad = false;
+        button.value = "RELOAD PLAYER";
+        player.initialize(document.querySelector("video"), url, true);
+      }
+      document.getElementById("trace").innerHTML = "";
+    }
+  </script>
+
+<style>
+    video {
+        width: 640px;
+        height: 360px;
+    }
+    textarea {
+        width: 500px;
+        height:360px;
+        font-size: 10px;
+    }
+    input, select {
+        background-color: orange;
+    }
+  </style>
+
+</head>
+
+<body ng-app="transperfectDashjsApp">
+
+  <div class="header">
+    <div class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
-            </button>
+          </button>
 
-            <a class="navbar-brand" href="#/">transperfectDashjs</a>
-          </div>
+          <a class="navbar-brand" href="/">AngularJs &amp; Dash.js</a>
+        </div>
 
-          <div class="collapse navbar-collapse" id="js-navbar-collapse">
+        <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#/">Home</a></li>
-              <li><a ng-href="#/about">About</a></li>
-              <li><a ng-href="#/">Contact</a></li>
-            </ul>
-          </div>
+          <ul class="nav navbar-nav">
+            <li id="tab-home" class="tab_item active"><a href="/">Home</a></li>
+            <li id="tab-about" class="tab_item"><a href="/#!/about">About</a></li>
+            <li id="tab-contact" class="tab_item"><a href="/#!/contact">Contact</a></li>
+          </ul>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="container">
+  <div class="container">
     <div ng-view=""></div>
+  </div>
+
+  <div class="footer">
+    <div class="container">
+      <p><span class=""></span>AngularJs and Dash.js</p>
     </div>
+  </div>
 
-    <div class="footer">
-      <div class="container">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
-      </div>
-    </div>
+  <script src="vendor/dash.all.debug.js"></script>
 
+  <script src="vendor/angular.min.js"></script>
+  <script src="vendor/angular-animate.min.js"></script>
+  <script src="vendor/angular-aria.min.js"></script>
+  <script src="vendor/angular-cookies.min.js"></script>
+  <script src="vendor/angular-messages.min.js"></script>
+  <script src="vendor/angular-mocks.js"></script>
+  <script src="vendor/angular-resource.min.js"></script>
+  <script src="vendor/angular-route.min.js"></script>
+  <script src="vendor/angular-sanitize.min.js"></script>
+  <script src="vendor/angular-touch.min.js"></script>
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-     <script>
-       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
-       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
-       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
-       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-       ga('create', 'UA-XXXXX-X');
-       ga('send', 'pageview');
-    </script>
-
-    <!-- build:js(.) scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="vendor/angular.min.js"></script>
-    <script src="vendor/angular-animate.min.js"></script>
-    <script src="vendor/angular-aria.min.js"></script>
-    <script src="vendor/angular-cookies.min.js"></script>
-    <script src="vendor/angular-messages.min.js"></script>
-    <script src="vendor/angular-mocks.js"></script>
-    <script src="vendor/angular-resource.min.js"></script>
-    <script src="vendor/angular-route.min.js"></script>
-    <script src="vendor/angular-sanitize.min.js"></script>
-    <script src="vendor/angular-touch.min.js"></script>
-    <script src="vendor/dash.all.debug.js"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
-
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
-        <!-- endbuild -->
+  <script src="scripts/app.js"></script>
+  <script src="scripts/controllers/main.js"></script>
+  <script src="scripts/controllers/about.js"></script>
+  <script src="scripts/controllers/contact.js"></script>
 </body>
+
 </html>
