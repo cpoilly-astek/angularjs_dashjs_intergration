@@ -14,7 +14,7 @@ angular.module('transperfectDashjsApp')
     window.dash.init();
 
     // simulate click so that video is loaded when entering screen
-    var btnLoad = window.document.querySelector('#btnLoadPlayer')
+    var btnLoad = window.document.querySelector('#btnLoadPlayer');
     if (btnLoad) { btnLoad.click(); }
     else { window.dash.load(this); }
 
