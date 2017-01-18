@@ -8,13 +8,13 @@
   <meta name="viewport" content="width=device-width">
 
   <link rel="stylesheet" href="styles/angular-material.min.css">
-  
+
   <link rel="stylesheet" href="styles/bootstrap.css">
   <link rel="stylesheet" href="styles/main.css">
 
   <script src="scripts/dash-custom.js"></script>
 
-<style>
+  <style>
     video {
         width: 640px;
         height: 360px;
@@ -33,32 +33,19 @@
 
 <body ng-app="transperfectDashjsApp">
 
-  <div class="header">
-    <div class="navbar navbar-default" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
+  <md-toolbar class="">
+    <div class="md-toolbar-tools">
+      <h2> <span>AngularJs &amp; Dash.js</span> </h2>
+      <span flex></span>
 
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-          </button>
-
-          <a class="navbar-brand" href="/">AngularJs &amp; Dash.js</a>
-        </div>
-
-        <div class="collapse navbar-collapse" id="js-navbar-collapse">
-
-          <ul class="nav navbar-nav">
-            <li id="tab-home" class="tab_item active"><a href="/">Home</a></li>
-            <li id="tab-about" class="tab_item"><a href="/#!/about">About</a></li>
-            <li id="tab-contact" class="tab_item"><a href="/#!/contact">Contact</a></li>
-          </ul>
-        </div>
-      </div>
+      <md-nav-bar md-selected-nav-item="currentNavItem" class="md-primary">
+        <md-nav-item md-nav-href="/#!/home"     name="home"     class="md-primary md-hue-1">Demo</md-nav-item>
+        <md-nav-item md-nav-href="/#!/about"    name="about"    class="md-primary md-hue-1">About</md-nav-item>
+        <md-nav-item md-nav-href="/#!/contact"  name="contact"  class="md-primary md-hue-1">Contact</md-nav-item>
+      </md-nav-bar>
     </div>
-  </div>
+
+  </md-toolbar>
 
   <div class="container">
     <div ng-view=""></div>

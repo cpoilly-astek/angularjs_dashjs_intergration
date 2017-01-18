@@ -11,14 +11,21 @@
 angular
   .module('transperfectDashjsApp', [
     'ngAnimate',
-    //'ngAria',
+    'ngAria',
     'ngCookies',
     'ngMessages',
     'ngResource',
     'ngRoute',
     //'ngSanitize',
-    'ngTouch'
+    //'ngTouch',
+    'ngMaterial'
   ])
+
+  .config(function ($mdThemingProvider) {
+    $mdThemingProvider.theme('default')
+      .primaryPalette('light-blue')
+      .accentPalette('deep-purple');
+  })
 
   .run(function ($rootScope, $location) {
 

@@ -1,3 +1,6 @@
+// jshint ignore: start
+'use strict';
+
 var dash;
 
 var player, firstLoad = true;
@@ -9,11 +12,15 @@ dash = {
     },
 
     log: function (msg) {
+        
         msg = msg.length > 90 ? msg.substring(0, 90) + "..." : msg; // to avoid wrapping with large objects
         var tracePanel = document.getElementById("trace");
-        tracePanel.innerHTML += msg + "\n";
-        tracePanel.scrollTop = tracePanel.scrollHeight;
-        console.log(msg);
+        
+        if(tracePanel) {
+            tracePanel.innerHTML += msg + "\n";
+            tracePanel.scrollTop = tracePanel.scrollHeight;
+            console.log(msg);
+        }
     },
 
     showEvent: function (e) {
@@ -62,7 +69,10 @@ dash = {
             button.value = "RELOAD PLAYER";
             player.initialize(document.querySelector("video"), url, true);
         }
-        document.getElementById("trace").innerHTML = "";
+        if(document.getElementById("trace")) {
+
+            document.getElementById("trace").innerHTML = "";
+        }
     }
 
 }
