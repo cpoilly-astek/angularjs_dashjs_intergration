@@ -9,7 +9,10 @@ npm install
 bower install
 
 
-Start: gulp serve
+
+Start: 
+
+gulp serve
 
 Note that you need to have Gulp installed globally as well
 
